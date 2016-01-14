@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_number: 
+  second_number: 
+  third_number: 
+  drawing_date: 
+
+two:
+  first_number: 
+  second_number: 
+  third_number: 
+  drawing_date: 

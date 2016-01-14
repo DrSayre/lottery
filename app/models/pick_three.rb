@@ -1,0 +1,2 @@
+class PickThree < ApplicationRecord
+end
