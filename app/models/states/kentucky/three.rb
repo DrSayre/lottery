@@ -1,7 +1,7 @@
 module States
-  module PickThreeGames
+  module Kentucky
     # Kentucky Pick 3
-    class Kentucky < PickThree
+    class Three < PickThree
       scope :drawings, -> { State.find_by(name: 'Kentucky').pick_threes }
       scope :drawings_three_months, -> { State.find_by(name: 'Kentucky').pick_threes.where(drawing_date: 3.months.ago..Date.tomorrow) }
       scope :midday_drawings, -> { drawings.where(drawing_time_id: DrawingTime.find_by(name: 'Midday').id) }
