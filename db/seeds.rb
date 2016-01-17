@@ -5,13 +5,18 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-def print_numbers(results)
+State.create(name: 'Kentucky')
+DrawingTime.create(name: 'Midday')
+DrawingTime.create(name: 'Evening')
+def save_numbers(results, draw)
+  time = DrawingTime.find_by name: draw
+  state = State.find_or_create_by name: 'Kentucky'
   results.each do |result|
-    foo = result.css('td')
-    numbers = foo[2].css('span').text.strip
+    results_row = result.css('td')
+    numbers = results_row[2].css('span').text.strip
     winning_numbers = numbers.scan(/\d/)
-    PickThree.create(drawing_date: foo[1].text, first_number: winning_numbers[0], second_number: winning_numbers[1], third_number: winning_numbers[2]) if numbers.match /^\d/
-    # print "\n==========\nDate: #{foo[1].text}\nNumbers: #{winning_numbers[0]} #{winning_numbers[1]} #{winning_numbers[2]}\n==========\n" if numbers.match /^\d/
+    drawing_date = Date.strptime(results_row[1].text,"%m/%d/%Y")
+    PickThree.create(drawing_date: drawing_date, first_number: winning_numbers[0], second_number: winning_numbers[1], third_number: winning_numbers[2], drawing_time_id: time.id, state_id: state.id) if numbers.match /^\d/
   end
 end
 
@@ -22,6 +27,6 @@ html = agent.get('http://www.kylottery.com/apps/draw_games/pick3/pick3_pastwinni
 midday_results = Nokogiri::HTML(html).css('table table')[0].css('tbody').css('tr')
 night_results = Nokogiri::HTML(html).css('table table')[1].css('tbody').css('tr')
 
-print_numbers(midday_results)
+save_numbers(midday_results, 'Midday')
 
-print_numbers(night_results)
+save_numbers(night_results, 'Evening')

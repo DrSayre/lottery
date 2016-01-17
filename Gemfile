@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '>= 5.0.0.beta1', '< 5.1'
+gem 'rails', git: 'https://github.com/rails/rails.git', branch: 'master' #'>= 5.0.0.beta1', '< 5.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Uglifier as compressor for JavaScript assets
@@ -22,6 +22,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'puma'
 gem 'mechanize'
 gem 'nokogiri'
+gem 'descriptive_statistics'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

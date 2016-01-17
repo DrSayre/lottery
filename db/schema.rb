@@ -11,15 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160114034358) do
+ActiveRecord::Schema.define(version: 20160116191812) do
+
+  create_table "drawing_times", force: :cascade do |t|
+    t.text     "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "pick_threes", force: :cascade do |t|
     t.integer  "first_number"
     t.integer  "second_number"
     t.integer  "third_number"
     t.date     "drawing_date"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "state_id"
+    t.integer  "drawing_time_id"
+    t.index ["drawing_time_id"], name: "index_pick_threes_on_drawing_time_id"
+    t.index ["state_id"], name: "index_pick_threes_on_state_id"
+  end
+
+  create_table "states", force: :cascade do |t|
+    t.text     "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
