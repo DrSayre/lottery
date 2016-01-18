@@ -2,12 +2,36 @@ module States
   module Kentucky
     # Kentucky Pick 3
     class Three < PickThree
-      scope :drawings, -> { State.find_by(name: 'Kentucky').pick_threes }
-      scope :drawings_three_months, -> { State.find_by(name: 'Kentucky').pick_threes.where(drawing_date: 3.months.ago..Date.tomorrow) }
-      scope :midday_drawings, -> { drawings.where(drawing_time_id: DrawingTime.find_by(name: 'Midday').id) }
-      scope :midday_drawings_three_months, -> { drawings.where(drawing_time_id: DrawingTime.find_by(name: 'Midday').id, drawing_date: 3.months.ago..Date.tomorrow) }
-      scope :evening_drawings, -> { drawings.where(drawing_time_id: DrawingTime.find_by(name: 'Evening').id) }
-      scope :evening_drawings_three_months, -> { drawings.where(drawing_time_id: DrawingTime.find_by(name: 'Evening').id, drawing_date: 3.months.ago..Date.tomorrow) }
+      scope :drawings, lambda {
+        State.find_by(name: 'Kentucky').pick_threes
+      }
+      scope :drawings_three_months, lambda {
+        State.find_by(name: 'Kentucky').pick_threes.where(
+          drawing_date: 3.months.ago..Date.tomorrow
+        )
+      }
+      scope :midday_drawings, lambda {
+        drawings.where(
+          drawing_time_id: DrawingTime.find_by(name: 'Midday').id
+        )
+      }
+      scope :midday_drawings_three_months, lambda {
+        drawings.where(
+          drawing_time_id: DrawingTime.find_by(name: 'Midday').id,
+          drawing_date: 3.months.ago..Date.tomorrow
+        )
+      }
+      scope :evening_drawings, lambda {
+        drawings.where(
+          drawing_time_id: DrawingTime.find_by(name: 'Evening').id
+        )
+      }
+      scope :evening_drawings_three_months, lambda {
+        drawings.where(
+          drawing_time_id: DrawingTime.find_by(name: 'Evening').id,
+          drawing_date: 3.months.ago..Date.tomorrow
+        )
+      }
 
       def self.evening_drawing_numbers
         [
