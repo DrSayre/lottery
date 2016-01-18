@@ -23,3 +23,5 @@ Things you may want to cover:
 
 * ...
 # Lottery
+
+This is a work in progress; however, rails db:migrate will insert all pick 3 and pick 4 Kentucky Lottery numbers from the past 6 months or so.
